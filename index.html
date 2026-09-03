@@ -1,0 +1,382 @@
+<title>Архитектор реальности: Соглашение</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    --bg: #F6F4FA;
+    --surface: #FFFFFF;
+    --surface-alt: #FBFAFD;
+    --text: #1C1626;
+    --text-muted: #6B6178;
+    --accent: #4B2E83;
+    --accent-soft: #EDE7F7;
+    --gold: #A57F3F;
+    --gold-soft: #F4EDDF;
+    --border: #E1DCEC;
+    --rule: #D8D0E8;
+    --shadow: 0 1px 2px rgba(28, 22, 38, 0.04), 0 8px 24px rgba(28, 22, 38, 0.05);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #15101F;
+      --surface: #1E1830;
+      --surface-alt: #241C38;
+      --text: #ECE7F5;
+      --text-muted: #A79BB8;
+      --accent: #B49AE0;
+      --accent-soft: #2C2245;
+      --gold: #C9A667;
+      --gold-soft: #2E2618;
+      --border: #362B4D;
+      --rule: #362B4D;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #15101F;
+    --surface: #1E1830;
+    --surface-alt: #241C38;
+    --text: #ECE7F5;
+    --text-muted: #A79BB8;
+    --accent: #B49AE0;
+    --accent-soft: #2C2245;
+    --gold: #C9A667;
+    --gold-soft: #2E2618;
+    --border: #362B4D;
+    --rule: #362B4D;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', -apple-system, Segoe UI, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 64px 24px 96px;
+  }
+
+  header.doc-head {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 18px;
+    margin-bottom: 40px;
+  }
+
+  .mark {
+    width: 52px;
+    height: 52px;
+    color: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: clamp(28px, 5vw, 38px);
+    line-height: 1.15;
+    margin: 0;
+    text-wrap: balance;
+    color: var(--text);
+  }
+
+  .byline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .contact-callout {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--accent-soft);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-top: 8px;
+  }
+
+  .contact-callout .label {
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+  }
+
+  .contact-callout a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+  }
+  .contact-callout a:hover { opacity: 0.8; }
+  .contact-callout a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .lede {
+    color: var(--text-muted);
+    font-size: 16px;
+    line-height: 1.7;
+    text-align: left;
+    margin: 8px 0 0;
+  }
+
+  section.clause {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 20px;
+    padding: 28px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  section.clause .num {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: 28px;
+    color: var(--gold);
+    line-height: 1.3;
+    font-variant-numeric: tabular-nums;
+  }
+
+  section.clause h2 {
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 20px;
+    margin: 0 0 10px;
+    color: var(--text);
+    text-wrap: balance;
+  }
+
+  section.clause p {
+    margin: 0 0 12px;
+    max-width: 62ch;
+  }
+  section.clause p:last-child { margin-bottom: 0; }
+
+  section.clause strong { color: var(--text); font-weight: 600; }
+
+  /* --- pricing table --- */
+  .price-group {
+    margin-bottom: 20px;
+  }
+  .price-group:last-child { margin-bottom: 0; }
+
+  .price-group h3 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    margin: 0 0 8px;
+  }
+
+  .price-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 9px 0;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .price-row:last-child { border-bottom: none; }
+
+  .price-name { font-size: 15px; }
+
+  .price-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  /* --- requisites --- */
+  .requisites {
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-top: 8px;
+    box-shadow: var(--shadow);
+  }
+
+  .req-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .req-row:last-child { border-bottom: none; }
+
+  .req-label {
+    font-size: 13px;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+  }
+
+  .req-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 15px;
+    text-align: right;
+  }
+  .req-value a { color: var(--accent); }
+
+  footer {
+    text-align: center;
+    margin-top: 48px;
+    color: var(--text-muted);
+    font-size: 13px;
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  @media (max-width: 480px) {
+    section.clause { grid-template-columns: 1fr; gap: 6px; }
+    section.clause .num { font-size: 18px; }
+    .req-row, .price-row { flex-direction: column; align-items: flex-start; gap: 2px; }
+    .req-value { text-align: left; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="doc-head">
+    <svg class="mark" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="26" cy="26" r="24" stroke="currentColor" stroke-width="1"/>
+      <circle cx="26" cy="26" r="15" stroke="currentColor" stroke-width="1"/>
+      <path d="M26 2 L26 50 M2 26 L50 26 M9.5 9.5 L42.5 42.5 M42.5 9.5 L9.5 42.5" stroke="currentColor" stroke-width="0.75" opacity="0.55"/>
+      <circle cx="26" cy="26" r="2.5" fill="currentColor"/>
+    </svg>
+    <h1>Пользовательское соглашение<br>«Архитектор реальности»</h1>
+    <div class="byline">Обновлено — сентябрь 2026</div>
+
+    <div class="contact-callout">
+      <span class="label">Контакты:</span>
+      <a href="https://t.me/Gzhelo4ka" target="_blank" rel="noopener">@Gzhelo4ka</a>
+    </div>
+
+    <p class="lede">Сервис «Архитектор реальности» — Telegram-бот, объединяющий Таро, астрологию, курсы самопознания и игру «Лила» на базе технологий искусственного интеллекта. Ниже — условия, на которых он предоставляется.</p>
+  </header>
+
+  <section class="clause">
+    <div class="num">01</div>
+    <div>
+      <h2>Общие положения</h2>
+      <p>Сервис «Архитектор реальности» — это Telegram-бот, объединяющий несколько разделов: «Карманный таролог» (расклады Таро), «Астрология» (натальная карта и прогнозы), «Матрица Судьбы», «Конструктор реальности» (курсы самопознания) и игра «Лила». Все разделы используют, в том числе, технологии искусственного интеллекта для генерации персональных текстов.</p>
+    </div>
+  </section>
+
+  <section class="clause">
+    <div class="num">02</div>
+    <div>
+      <h2>Характер услуг</h2>
+      <p>Сервис носит развлекательный и просветительский характер. Результаты раскладов, гороскопов, курсов и игровых партий являются интерпретацией алгоритмов и не являются медицинской, юридической, финансовой или психологической рекомендацией. Пользователь самостоятельно несёт ответственность за все решения, принятые на основе полученной информации.</p>
+    </div>
+  </section>
+
+  <section class="clause">
+    <div class="num">03</div>
+    <div>
+      <h2>Стоимость услуг</h2>
+      <p>Стоимость указана в рублях за одну единицу услуги (один расклад, один раздел, одна партия и т. д.):</p>
+
+      <div class="price-group">
+        <h3>Карманный таролог</h3>
+        <div class="price-row"><span class="price-name">Расклад Таро (любой из 12)</span><span class="price-value">200 ₽</span></div>
+      </div>
+
+      <div class="price-group">
+        <h3>Матрица Судьбы</h3>
+        <div class="price-row"><span class="price-name">Один раздел</span><span class="price-value">100 ₽</span></div>
+        <div class="price-row"><span class="price-name">Пакет всех разделов</span><span class="price-value">590 ₽</span></div>
+      </div>
+
+      <div class="price-group">
+        <h3>Астрология</h3>
+        <div class="price-row"><span class="price-name">Вектор Года</span><span class="price-value">1000 ₽</span></div>
+        <div class="price-row"><span class="price-name">Матрица Реализации</span><span class="price-value">500 ₽</span></div>
+        <div class="price-row"><span class="price-name">Совместимость</span><span class="price-value">500 ₽</span></div>
+      </div>
+
+      <div class="price-group">
+        <h3>Тесты самопознания</h3>
+        <div class="price-row"><span class="price-name">Синтез</span><span class="price-value">500 ₽</span></div>
+        <div class="price-row"><span class="price-name">Синтез — пересборка</span><span class="price-value">300 ₽</span></div>
+      </div>
+
+      <div class="price-group">
+        <h3>Конструктор реальности</h3>
+        <div class="price-row"><span class="price-name">Этап 1</span><span class="price-value">1000 ₽</span></div>
+        <div class="price-row"><span class="price-name">Этап 2</span><span class="price-value">1500 ₽</span></div>
+        <div class="price-row"><span class="price-name">Этап 3</span><span class="price-value">2000 ₽</span></div>
+        <div class="price-row"><span class="price-name">Весь курс целиком</span><span class="price-value">3990 ₽</span></div>
+      </div>
+
+      <div class="price-group">
+        <h3>Игра «Лила»</h3>
+        <div class="price-row"><span class="price-name">Одна партия</span><span class="price-value">1500 ₽</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="clause">
+    <div class="num">04</div>
+    <div>
+      <h2>Оплата и возврат средств</h2>
+      <p>Оплата производится автоматически через платёжный сервис (ЮKassa / Robokassa) — доступны банковские карты и Система быстрых платежей (СБП). После подтверждения оплаты доступ к оплаченному разделу открывается автоматически, без участия оператора.</p>
+      <p>Услуга считается оказанной в момент отправки ботом результата (расклада, разбора, задания дня, партии). Если доступ не открылся в течение нескольких минут после оплаты — это признак технического сбоя: напишите в поддержку <a href="https://t.me/Gzhelo4ka" target="_blank" rel="noopener" style="color:var(--accent)">@Gzhelo4ka</a>, указав дату и сумму платежа. Каждый случай рассматривается индивидуально: при подтверждённом сбое мы либо откроем доступ повторно, либо, в исключительных случаях, вернём средства.</p>
+    </div>
+  </section>
+
+  <section class="clause">
+    <div class="num">05</div>
+    <div>
+      <h2>Конфиденциальность</h2>
+      <p>Мы гарантируем защиту предоставленных вами данных — это может быть имя, дата и место рождения (для Астрологии), тексты вопросов и ответов (для Таро, Конструктора реальности и игры «Лила»). Эти данные используются исключительно для генерации персонального ответа внутри бота и не передаются третьим лицам.</p>
+    </div>
+  </section>
+
+  <section class="clause">
+    <div class="num">06</div>
+    <div>
+      <h2>Принятие условий</h2>
+      <p>Использование любого раздела бота «Архитектор реальности» означает ваше полное и безоговорочное согласие с данными правилами.</p>
+    </div>
+  </section>
+
+  <section class="clause">
+    <div class="num">07</div>
+    <div>
+      <h2>Реквизиты исполнителя</h2>
+      <div class="requisites">
+        <div class="req-row"><span class="req-label">Исполнитель</span><span class="req-value">Мингазова Гузель Равилевна</span></div>
+        <div class="req-row"><span class="req-label">Налоговый статус</span><span class="req-value">плательщик налога на профессиональный доход (самозанятая)</span></div>
+        <div class="req-row"><span class="req-label">ИНН</span><span class="req-value">164808818758</span></div>
+        <div class="req-row"><span class="req-label">Контакты</span><span class="req-value"><a href="https://t.me/Gzhelo4ka" target="_blank" rel="noopener">@Gzhelo4ka</a></span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Архитектор реальности · Telegram-бот</footer>
+
+</div>
